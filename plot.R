@@ -39,7 +39,8 @@ simulateMovement1 <- function(initial_state, transition_matrix, num_steps) {
 }
 
 # Simulate robot movement for 10 steps starting from state 1
-trajectory <- simulateMovement1(1, transition_matrix, num_steps = 10)
+initial_state<-1
+trajectory <- simulateMovement1(initial_state, transition_matrix, num_steps = 10)
 
 # function to create line segments with arrowheads
 createLineSegments <- function(trajectory) {
@@ -56,11 +57,11 @@ segments <- createLineSegments(trajectory)
 
 # plot
 grid_plot <- ggplot(coordinates, aes(x, y)) +
-  geom_text(aes(label = state), color = "black", size = 5) +
+  geom_text(aes(label = state), colour = "black", size = 5) +
   geom_segment(data = segments, aes(x = x_start, y = y_start, xend = x_end, yend = y_end),
                arrow = arrow(length = unit(0.25, "cm")), colour = "red", linewidth = 1) +
   geom_point(data = coordinates[coordinates$state == initial_state,], aes(x, y),
-             color = "blue", size = 3) +
+             colour = "blue", size = 3) +
   coord_equal() +
   theme_void()
 grid_plot
@@ -111,11 +112,11 @@ trajectory <- simulateMovement1(initial_state, transition_matrix, num_steps)
 segments <- createLineSegments(trajectory)
 
 grid_plot <- ggplot(coordinates, aes(x, y)) +
-  geom_text(aes(label = state), color = "black", size = 5) +
+  geom_text(aes(label = state), colour = "black", size = 5) +
   geom_segment(data = segments, aes(x = x_start, y = y_start, xend = x_end, yend = y_end),
                arrow = arrow(length = unit(0.25, "cm")), colour = "red", linewidth = 1) +
   geom_point(data = coordinates[coordinates$state == initial_state,], aes(x, y),
-             color = "blue", size = 3) +
+             colour = "blue", size = 3) +
   coord_equal() +
   theme_void()
 grid_plot
@@ -145,7 +146,7 @@ state_grid <- matrix(state_frequencies, nrow = grid_size, ncol = grid_size, byro
 # Plot heatmap of state frequencies
 heatmap_plot <- ggplot(melt(state_grid), aes(Var2, Var1, fill = value)) +
   geom_tile() +
-  scale_fill_gradient(low = "white", high = "purple") +
+  scale_fill_gradient(low = "white", high = "red") +
   labs(x = "X", y = "Y", fill = "Frequency") +
   theme_minimal()
 heatmap_plot
